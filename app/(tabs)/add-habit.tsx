@@ -12,6 +12,7 @@ import {
   useTheme,
 } from "react-native-paper";
 import { useAuth } from "../../lib/auth-context";
+import { useBumpVersion } from "@/lib/bump-version-provider";
 
 const FREQUENCIES = ["daily", "weekly", "monthly"];
 
@@ -24,6 +25,7 @@ export default function AddHabitScreen() {
   const { user } = useAuth();
   const [error, setError] = useState<string>("");
   const theme = useTheme();
+  const {bumpHabit} = useBumpVersion();
 
   const handleSubmit = async () => {
     if (!user) {
@@ -69,6 +71,7 @@ export default function AddHabitScreen() {
       setError("Creating the habit went wrong");
     }
 
+    bumpHabit();
     router.back();
   };
 
