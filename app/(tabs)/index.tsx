@@ -7,7 +7,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Platform, StyleSheet, Text, View } from "react-native";
 import { Button, Surface } from "react-native-paper";
-import { useAuth } from "../../lib/auth-context";
+
 
 import LocalStorageService from "@/services/LocalStorageService";
 import { HabitType } from "@/types/habit-type";
@@ -17,6 +17,7 @@ import { ScrollView, Swipeable } from "react-native-gesture-handler";
 import { useFocusEffect } from "expo-router";
 import { useBumpVersion } from "@/lib/bump-version-provider";
 import { HabitCompletionType } from "@/types/habit-completion-type";
+import { useUser  } from "@/hooks/useUser";
 
 // const usePageLoadEffect = (effect: () => void) => {
 //   if (Platform.OS === "web") {
@@ -27,12 +28,13 @@ import { HabitCompletionType } from "@/types/habit-completion-type";
 // };
 
 export default function HomeScreen() {
-  const { signOut, user } = useAuth();
+  
   const [habits, setHabits] = useState<HabitType[]>([]);
   const [isHabitAdded, setIsHabitAdded] = useState<boolean>(false);
   const [habitCompletionIds, setHabitCompletionIds] = useState<string[]>([]);
   const swipeableRefs = useRef<{ [key: string]: Swipeable | null }>({});
   const { habitVersion } = useBumpVersion();
+  const {user, logout } = useUser();
 
   const fetchHabits = async () => {
     if (!user) {
@@ -206,7 +208,7 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Today's Habits</Text>
-        <Button mode="text" onPress={signOut} icon={"logout"}>
+        <Button mode="text" onPress={logout} icon={"logout"}>
           Sign Out
         </Button>
       </View>

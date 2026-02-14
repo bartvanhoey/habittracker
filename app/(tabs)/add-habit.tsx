@@ -11,8 +11,9 @@ import {
   TextInput,
   useTheme,
 } from "react-native-paper";
-import { useAuth } from "../../lib/auth-context";
+
 import { useBumpVersion } from "@/lib/bump-version-provider";
+import { useUser } from "@/hooks/useUser";
 
 const FREQUENCIES = ["daily", "weekly", "monthly"];
 
@@ -22,7 +23,7 @@ export default function AddHabitScreen() {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [frequency, setFrequency] = useState<Frequency>("daily");
-  const { user } = useAuth();
+  const { user } = useUser();
   const [error, setError] = useState<string>("");
   const theme = useTheme();
   const {bumpHabit} = useBumpVersion();

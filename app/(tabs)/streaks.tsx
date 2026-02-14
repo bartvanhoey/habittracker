@@ -4,7 +4,7 @@ import {
   db,
   HABITS_TABLE_ID,
 } from "@/lib/appwrite";
-import { useAuth } from "@/lib/auth-context";
+
 import { HabitCompletionType } from "@/types/habit-completion-type";
 import { HabitType } from "@/types/habit-type";
 import React, { useState } from "react";
@@ -13,9 +13,10 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useCallback } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Card, Text } from "react-native-paper";
+import { useUser } from "@/hooks/useUser";
 
 export default function StreaksScreen() {
-  const { user } = useAuth();
+  const { user } = useUser();
   const [habits, setHabits] = useState<HabitType[]>([]);
   const [completedHabits, setCompletedHabits] = useState<HabitCompletionType[]>(
     [],
