@@ -1,8 +1,9 @@
+import { Button, ButtonText } from "@/components/ui/button";
 import { useUser } from "@/hooks/useUser";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { KeyboardAvoidingView, Platform, StyleSheet, View } from "react-native";
-import { Button, Text, TextInput, useTheme } from "react-native-paper";
+import { KeyboardAvoidingView, Platform, StyleSheet, Text as RNText, View } from "react-native";
+import { Button as RNPButton, Text, TextInput, useTheme } from "react-native-paper";
 // import { useAuth } from "../../lib/auth-context";
 
 export default function LoginScreen() {
@@ -39,6 +40,7 @@ export default function LoginScreen() {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <View style={styles.content}>
+        <RNText className="text-6xl font-bold text-yellow-500">Hello</RNText>
         <Text style={styles.title} variant="headlineMedium">
           Welcome Back!
         </Text>
@@ -73,7 +75,7 @@ export default function LoginScreen() {
           </Text>
         )}
 
-        <Button onPress={handleLogin} style={styles.button} mode="contained">
+        {/* <Button onPress={handleLogin} style={styles.button} mode="contained">
           Login
         </Button>
 
@@ -83,7 +85,12 @@ export default function LoginScreen() {
           mode="text"
         >
           Don't have an account? Sign Up
-        </Button>
+        </Button> */}
+
+  <Button variant="solid" size="md" action="primary">
+      <ButtonText>Click me</ButtonText>
+    </Button>
+
       </View>
     </KeyboardAvoidingView>
   );

@@ -1,3 +1,5 @@
+import "../global.css";
+
 import { Stack } from "expo-router";
 import React from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -8,9 +10,14 @@ import { AuthProvider } from "@/context/AuthContext";
 import { BumpVersionProvider } from "@/lib/bump-version-provider";
 import RouteGuard from "@/components/auth/RouteGuard";
 
+import { GluestackUIProvider } from '@/components/ui/gluestack-ui-provider';
+import '@/global.css';
+
 export default function RootLayout() {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    
+    <GluestackUIProvider mode="light">
+      <GestureHandlerRootView style={{ flex: 1 }}>
       <AuthProvider>
         <PaperProvider>
           <SafeAreaProvider>
@@ -32,5 +39,7 @@ export default function RootLayout() {
         </PaperProvider>
       </AuthProvider>
     </GestureHandlerRootView>
+    </GluestackUIProvider>
+  
   );
 }
